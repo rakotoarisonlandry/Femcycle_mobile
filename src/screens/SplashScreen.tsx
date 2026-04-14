@@ -15,7 +15,7 @@ export default function SplashScreen() {
       } else {
         router.replace("/auth/login");
       }
-    }, 2500); // durée animation
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
