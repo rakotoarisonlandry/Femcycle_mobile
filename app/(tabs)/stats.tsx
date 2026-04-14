@@ -6,7 +6,9 @@ export default function Stats() {
   const { data, loading } = useStats();
 
   if (loading) return <ActivityIndicator size="large" />;
-
+  if (!data.avg) {
+    return <Text style={{ color: "white" }}>Pas assez de données</Text>;
+  }
   return (
     <ScrollView
       style={{
