@@ -36,11 +36,11 @@ export default function Stats() {
           title="Douleur moyenne"
           value={`${data.symp?.avgPain || 0}/10`}
         />
-
+        {/* 
         <StatCard
           title="Humeur dominante"
           value={data.symp?.dominantMood || "N/A"}
-        />
+        /> */}
       </View>
 
       <View style={{ marginTop: 10 }}>
