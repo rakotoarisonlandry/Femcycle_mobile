@@ -1,23 +1,65 @@
-import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
-import API from "../../src/services/api";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import StatCard from "../../src/components/StatCard";
+import { useStats } from "../../src/hooks/useStats";
 
 export default function Stats() {
-  const [stats, setStats] = useState<any>({});
-  const [insights, setInsights] = useState([]);
+  const { data, loading } = useStats();
 
-  useEffect(() => {
-    API.get("/stats/cycle-average").then((res) => setStats(res.data));
-    API.get("/stats/ai/insights").then((res) => setInsights(res.data.insights));
-  }, []);
+  if (loading) return <ActivityIndicator size="large" />;
 
   return (
-    <View>
-      <Text>Moyenne cycle: {stats.averageCycle}</Text>
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: "#0f0f1a",
+        padding: 15,
+      }}
+    >
+      <StatCard
+        title="Cycle moyen"
+        value={`${data.avg?.averageCycle || 0} jours`}
+      />
 
-      {insights.map((i: string, idx: number) => (
-        <Text key={idx}>{i}</Text>
-      ))}
-    </View>
+      <StatCard
+        title="Précision prédiction"
+        value={`${data.acc?.accuracy || 0}%`}
+      />
+
+      <View style={{ marginTop: 10 }}>
+        <Text style={{ color: "white", fontSize: 18, marginBottom: 10 }}>
+          Symptômes
+        </Text>
+
+        <StatCard
+          title="Douleur moyenne"
+          value={`${data.symp?.avgPain || 0}/10`}
+        />
+
+        <StatCard
+          title="Humeur dominante"
+          value={data.symp?.dominantMood || "N/A"}
+        />
+      </View>
+
+      <View style={{ marginTop: 10 }}>
+        <Text style={{ color: "white", fontSize: 18, marginBottom: 10 }}>
+          Insights IA
+        </Text>
+
+        {data.ins?.insights?.map((item: string, index: number) => (
+          <View
+            key={index}
+            style={{
+              backgroundColor: "#1a1a2e",
+              padding: 15,
+              borderRadius: 15,
+              marginBottom: 10,
+            }}
+          >
+            <Text style={{ color: "white" }}>{item}</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
