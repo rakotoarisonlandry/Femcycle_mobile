@@ -1,9 +1,5 @@
-import { useAuthStore } from "@/src/store/authStore";
-import { Redirect } from "expo-router";
+import SplashScreen from "../src/screens/SplashScreen";
 
 export default function Index() {
-  const token = useAuthStore((state) => state.token);
-
-  return token ? <Redirect href="/(tabs)" /> : <Redirect href="/auth/login" />;
-  // return <Redirect href="/(tabs)" />;
+  return <SplashScreen />;
 }
