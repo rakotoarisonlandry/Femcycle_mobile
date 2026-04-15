@@ -1,3 +1,4 @@
+import { COLORS } from "@/src/constants/theme";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import StatCard from "../../src/components/StatCard";
 import { useStats } from "../../src/hooks/useStats";
@@ -13,7 +14,7 @@ export default function Stats() {
     <ScrollView
       style={{
         flex: 1,
-        backgroundColor: "#0f0f1a",
+        backgroundColor: COLORS.background,
         padding: 15,
       }}
     >
@@ -52,9 +53,9 @@ export default function Stats() {
           <View
             key={index}
             style={{
-              backgroundColor: "#1a1a2e",
-              padding: 15,
+              backgroundColor: COLORS.background,
               borderRadius: 15,
+              padding: 15,
               marginBottom: 10,
             }}
           >
