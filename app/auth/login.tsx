@@ -1,6 +1,7 @@
 import { COLORS } from "@/src/constants/theme";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
+import LottieView from "lottie-react-native";
 import { useState } from "react";
 import {
   ActivityIndicator,
@@ -51,14 +52,14 @@ export default function Login() {
       style={styles.root}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      {/* Background orb decorations */}
-
       <View style={styles.inner}>
-        {/* Logo / Brand */}
         <View style={styles.brandWrap}>
-          <View style={styles.logoRing}>
-            <View style={styles.logoInner} />
-          </View>
+          <LottieView
+            source={require("../../assets/json/logo.json")}
+            autoPlay
+            loop={true}
+            style={{ width: 150, height: 150 }}
+          />
           <Text style={styles.brandName}>FemCycle</Text>
           <Text style={styles.tagline}>
             Ton cycle, compris automatiquement.
